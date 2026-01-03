@@ -1,0 +1,92 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.overlay {
+  background: rgba(0, 0, 0, 0.55);
+  padding: 30px;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+h1 {
+  margin-bottom: 10px;
+  font-size: 1.8rem;
+}
+
+.names {
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+}
+
+.time-box {
+  margin: 15px 0;
+  padding: 15px;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.time {
+  font-size: 1.1rem;
+  margin-top: 5px;
+}
+
+.inputs {
+  margin-top: 20px;
+  text-align: left;
+}
+
+label {
+  font-size: 0.85rem;
+}
+
+.checkbox {
+  margin: 10px 0;
+  display: block;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="file"] {
+  width: 100%;
+  padding: 8px;
+  margin: 5px 0 12px;
+  border-radius: 8px;
+  border: none;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  background: #ff4d6d;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #ff2f55;
+}
+
+.hidden {
+  display: none;
+}

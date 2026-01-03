@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nosso Tempo Juntos</title>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="overlay" id="overlay">
+    <h1>Nosso Tempo Juntos ❤️</h1>
+
+    <!-- Nome do casal (oculto até preencher) -->
+    <div class="names hidden" id="coupleNames"></div>
+
+    <!-- Tempo de relacionamento -->
+    <div class="time-box">
+      <strong>Tempo de relacionamento</strong>
+      <div class="time" id="relationshipTime">--</div>
+    </div>
+
+    <!-- Meta -->
+    <div class="time-box hidden" id="goalBox">
+      <strong>Falta para a meta</strong>
+      <div class="time" id="goalTime">--</div>
+    </div>
+
+    <!-- Inputs -->
+    <div class="inputs">
+      <label>Nome do casal</label>
+      <input type="text" id="namesInput" placeholder="Ex: Ana & João" />
+
+      <label>Início do relacionamento</label>
+      <input type="date" id="startDate" />
+
+      <label class="checkbox">
+        <input type="checkbox" id="enableGoal" />
+        Adicionar meta
+      </label>
+
+      <label id="goalLabel" class="hidden">Data da meta</label>
+      <input type="date" id="goalDate" class="hidden" />
+
+      <label>Imagem de fundo</label>
+      <input type="file" id="backgroundInput" accept="image/*" />
+
+      <button onclick="startCounter()">Iniciar</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
