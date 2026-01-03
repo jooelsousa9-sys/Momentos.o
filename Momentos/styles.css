@@ -27,7 +27,6 @@ body {
 }
 
 h1 {
-  margin-bottom: 10px;
   font-size: 1.8rem;
 }
 
@@ -40,12 +39,11 @@ h1 {
   margin: 15px 0;
   padding: 15px;
   border-radius: 15px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255,255,255,0.1);
 }
 
 .time {
   font-size: 1.1rem;
-  margin-top: 5px;
 }
 
 .inputs {
@@ -53,18 +51,12 @@ h1 {
   text-align: left;
 }
 
-label {
-  font-size: 0.85rem;
-}
-
 .checkbox {
   margin: 10px 0;
   display: block;
 }
 
-input[type="text"],
-input[type="date"],
-input[type="file"] {
+input, button {
   width: 100%;
   padding: 8px;
   margin: 5px 0 12px;
@@ -73,10 +65,6 @@ input[type="file"] {
 }
 
 button {
-  width: 100%;
-  padding: 12px;
-  border-radius: 12px;
-  border: none;
   background: #ff4d6d;
   color: #fff;
   font-size: 1rem;
