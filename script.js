@@ -2,8 +2,21 @@ let startDate = null;
 let goalDate = null;
 let timer = null;
 
+// ===== ELEMENTOS =====
+const namesInput = document.getElementById('namesInput');
+const startDateInput = document.getElementById('startDate');
+const enableGoal = document.getElementById('enableGoal');
+const goalDateInput = document.getElementById('goalDate');
+const backgroundInput = document.getElementById('backgroundInput');
+
+const coupleNames = document.getElementById('coupleNames');
+const relationshipTime = document.getElementById('relationshipTime');
+const goalTime = document.getElementById('goalTime');
+const goalBox = document.getElementById('goalBox');
+const goalLabel = document.getElementById('goalLabel');
+
 // ===== META =====
-document.getElementById('enableGoal').addEventListener('change', () => {
+enableGoal.addEventListener('change', () => {
   const enabled = enableGoal.checked;
   toggleGoal(enabled);
   saveData();
@@ -138,19 +151,6 @@ function loadData() {
     updateCounters();
   }
 }
-
-// ===== ELEMENTOS =====
-const namesInput = document.getElementById('namesInput');
-const startDateInput = document.getElementById('startDate');
-const enableGoal = document.getElementById('enableGoal');
-const goalDateInput = document.getElementById('goalDate');
-const backgroundInput = document.getElementById('backgroundInput');
-
-const coupleNames = document.getElementById('coupleNames');
-const relationshipTime = document.getElementById('relationshipTime');
-const goalTime = document.getElementById('goalTime');
-const goalBox = document.getElementById('goalBox');
-const goalLabel = document.getElementById('goalLabel');
 
 // ===== INICIAR AO CARREGAR =====
 window.onload = loadData;
