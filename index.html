@@ -7,6 +7,25 @@
 
   <link rel="stylesheet" href="style.css" />
 </head>
+
+<!-- modal da Meta -->
+<div class="modal hidden" id="goalModal">
+  <div class="modal-content">
+    <h2>Adicionar Meta</h2>
+
+    <label> Descrição da Meta</label>
+    <input type="text" id="goalTitle" placeholder="Ex: 1 ano juntos" />
+
+    <label> Data para alcançar</label>
+    <input type="date" id="goalDateModal" />
+
+    <div class="modal-buttons">
+      <button class="secundary" onclick="closeGoalModal()">Cancelar</button>
+      <button onclick="saveGoal()">Salvar Meta</button>
+    </div>
+  </div>
+</div>
+
 <body>
 
   <div class="overlay" id="overlay">
@@ -35,10 +54,7 @@
       <label>Início do relacionamento</label>
       <input type="date" id="startDate" />
 
-      <label class="checkbox">
-        <input type="checkbox" id="enableGoal" />
-        Adicionar meta
-      </label>
+      <button type="button" onclick="openGoalModal()">Adicionar Meta</button>
 
       <label id="goalLabel" class="hidden">Data da meta</label>
       <input type="date" id="goalDate" class="hidden" />

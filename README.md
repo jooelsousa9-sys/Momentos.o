@@ -15,5 +15,3 @@ Como testar:
 1. Abra `index.html` no navegador.
 2. Verifique se o contador inicia após informar a data de início.
 3. Se houver problema, abra o Console do DevTools (F12) e me envie o erro exibido.
-
-Se quiser, eu posso também adicionar um pequeno teste automatizado ou um trecho de instruções mais detalhado.
