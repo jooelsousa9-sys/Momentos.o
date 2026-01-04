@@ -2,31 +2,49 @@ let startDate = null;
 let goalDate = null;
 let timer = null;
 
-// Alternar meta
-document.getElementById('enableGoal').addEventListener('change', () => {
-  const enabled = document.getElementById('enableGoal').checked;
+// ===== ELEMENTOS =====
+const namesInput = document.getElementById('namesInput');
+const startDateInput = document.getElementById('startDate');
+const enableGoal = document.getElementById('enableGoal');
+const goalDateInput = document.getElementById('goalDate');
+const backgroundInput = document.getElementById('backgroundInput');
 
-  document.getElementById('goalBox').classList.toggle('hidden', !enabled);
-  document.getElementById('goalDate').classList.toggle('hidden', !enabled);
-  document.getElementById('goalLabel').classList.toggle('hidden', !enabled);
+const coupleNames = document.getElementById('coupleNames');
+const relationshipTime = document.getElementById('relationshipTime');
+const goalTime = document.getElementById('goalTime');
+const goalBox = document.getElementById('goalBox');
+const goalLabel = document.getElementById('goalLabel');
+
+// ===== META =====
+enableGoal.addEventListener('change', () => {
+  const enabled = enableGoal.checked;
+  toggleGoal(enabled);
+  saveData();
 });
 
-// Escolha de imagem de fundo
-document.getElementById('backgroundInput').addEventListener('change', function () {
+function toggleGoal(enabled) {
+  goalBox.classList.toggle('hidden', !enabled);
+  goalDateInput.classList.toggle('hidden', !enabled);
+  goalLabel.classList.toggle('hidden', !enabled);
+}
+
+// ===== IMAGEM =====
+backgroundInput.addEventListener('change', function () {
   const file = this.files[0];
   if (!file) return;
 
   const reader = new FileReader();
-  reader.onload = function (e) {
+  reader.onload = e => {
     document.body.style.backgroundImage = `url('${e.target.result}')`;
+    localStorage.setItem('backgroundImage', e.target.result);
   };
   reader.readAsDataURL(file);
 });
 
+// ===== SALVAR / INICIAR =====
 function startCounter() {
-  const names = document.getElementById('namesInput').value.trim();
-  const startValue = document.getElementById('startDate').value;
-  const goalEnabled = document.getElementById('enableGoal').checked;
+  const names = namesInput.value.trim();
+  const startValue = startDateInput.value;
 
   if (!startValue) {
     alert('Informe a data de início do relacionamento');
@@ -36,19 +54,17 @@ function startCounter() {
   startDate = new Date(startValue + 'T00:00:00');
 
   if (names) {
-    const nameDiv = document.getElementById('coupleNames');
-    nameDiv.innerText = names;
-    nameDiv.classList.remove('hidden');
+    coupleNames.innerText = names;
+    coupleNames.classList.remove('hidden');
   }
 
-  if (goalEnabled) {
-    const goalValue = document.getElementById('goalDate').value;
-    if (goalValue) {
-      goalDate = new Date(goalValue + 'T00:00:00');
-    }
+  if (enableGoal.checked && goalDateInput.value) {
+    goalDate = new Date(goalDateInput.value + 'T00:00:00');
   } else {
     goalDate = null;
   }
+
+  saveData();
 
   if (!timer) {
     timer = setInterval(updateCounters, 1000);
@@ -57,19 +73,20 @@ function startCounter() {
   updateCounters();
 }
 
+// ===== CONTADORES =====
 function updateCounters() {
   const now = new Date();
 
   if (startDate) {
     const diff = dateDiff(startDate, now);
-    document.getElementById('relationshipTime').innerText =
+    relationshipTime.innerText =
       `${diff.years} anos, ${diff.months} meses, ${diff.days} dias, ` +
       `${diff.hours}h ${diff.minutes}m ${diff.seconds}s`;
   }
 
   if (goalDate) {
     const diff = dateDiff(now, goalDate);
-    document.getElementById('goalTime').innerText =
+    goalTime.innerText =
       diff.totalSeconds > 0
         ? `${diff.years} anos, ${diff.months} meses, ${diff.days} dias, ` +
           `${diff.hours}h ${diff.minutes}m ${diff.seconds}s`
@@ -77,30 +94,63 @@ function updateCounters() {
   }
 }
 
+// ===== DIFERENÇA DE TEMPO =====
 function dateDiff(start, end) {
   let delta = Math.floor((end - start) / 1000);
   delta = Math.abs(delta);
 
-  const seconds = delta % 60;
-  const minutes = Math.floor(delta / 60) % 60;
-  const hours = Math.floor(delta / 3600) % 24;
-  const days = Math.floor(delta / 86400) % 30;
-  const months = Math.floor(delta / (86400 * 30)) % 12;
-  const years = Math.floor(delta / (86400 * 365));
-
   return {
-    years,
-    months,
-    days,
-    hours,
-    minutes,
-    seconds,
+    seconds: delta % 60,
+    minutes: Math.floor(delta / 60) % 60,
+    hours: Math.floor(delta / 3600) % 24,
+    days: Math.floor(delta / 86400) % 30,
+    months: Math.floor(delta / (86400 * 30)) % 12,
+    years: Math.floor(delta / (86400 * 365)),
     totalSeconds: end - start
   };
 }
+
+// ===== LOCAL STORAGE =====
 function saveData() {
   localStorage.setItem('names', namesInput.value);
   localStorage.setItem('startDate', startDateInput.value);
   localStorage.setItem('enableGoal', enableGoal.checked);
   localStorage.setItem('goalDate', goalDateInput.value);
 }
+
+function loadData() {
+  const names = localStorage.getItem('names');
+  const start = localStorage.getItem('startDate');
+  const goalEnabled = localStorage.getItem('enableGoal') === 'true';
+  const goal = localStorage.getItem('goalDate');
+  const bg = localStorage.getItem('backgroundImage');
+
+  if (bg) document.body.style.backgroundImage = `url('${bg}')`;
+
+  if (names) {
+    namesInput.value = names;
+    coupleNames.innerText = names;
+    coupleNames.classList.remove('hidden');
+  }
+
+  if (start) {
+    startDateInput.value = start;
+    startDate = new Date(start + 'T00:00:00');
+  }
+
+  enableGoal.checked = goalEnabled;
+  toggleGoal(goalEnabled);
+
+  if (goal && goalEnabled) {
+    goalDateInput.value = goal;
+    goalDate = new Date(goal + 'T00:00:00');
+  }
+
+  if (start) {
+    timer = setInterval(updateCounters, 1000);
+    updateCounters();
+  }
+}
+
+// ===== INICIAR AO CARREGAR =====
+window.onload = loadData;
